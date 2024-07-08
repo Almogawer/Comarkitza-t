@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Gestor d'Usuaris</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Menú lateral a l'esquerra -->
+      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">
+                Gestor d'Usuaris
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="gestorAmistats.html">
+                Gestor d'Amistats
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html">
+                Login
+              </a>
+            </li>
+            <!-- Pots afegir altres elements del menú aquí -->
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Contingut principal -->
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="container mt-5">
+          <h2>Gestor d'Usuaris</h2>
+
+          <!-- Formulari per afegir un usuari -->
+          <form id="formAfegirUsuari">
+            <div class="form-group">
+              <label for="nom">Nom:</label>
+              <input type="text" class="form-control" id="nom" placeholder="Introdueix el nom de l'usuari" required>
+              <label for="contrasenya">Contrasenya:</label>
+              <input type="password" class="form-control" id="contrasenya" required>
+              <label for="comarques">Comarca:</label>
+              <select class="form-control" id="comarcas" required>
+                <!-- Aquí es generaran les opcions amb les comarques -->
+              </select>
+              <label for="admin">Admin (0 o 1)</label>
+              <input type="number" class="form-control" id="admin" placeholder=1 required>
+                <!-- Aquí es generaran les opcions amb les comarques -->
+              </select>
+              
+            </div>
+            <button type="submit" class="btn btn-primary">Afegir Usuari</button>
+          </form>
+
+          <hr>
+
+          <h2>Llista d'Usuaris</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Comarca</th>
+                <th scope="col">Admin</th>
+                <th scope="col">Contrasenya</th>
+              </tr>
+            </thead>
+            <tbody id="llistaUsuaris">
+              <!-- Contingut generat dinàmicament amb JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Afegir jQuery i altres scripts JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- Afegeix altres enllaços JavaScript si és necessari -->
+  <script src="js/usuaris_controller.js"></script>
+</body>
+
+</html>

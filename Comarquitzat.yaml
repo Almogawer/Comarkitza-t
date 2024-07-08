@@ -1,0 +1,1023 @@
+openapi: 3.0.3
+
+info:
+  title: Comarquitzat - Arnau Roca
+  description: >-
+    This is a sample Task list based on the OpenAPI 3.0 specification. 
+  termsOfService: http://swagger.io/terms/
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3001/
+
+
+tags:
+  - name: Comarquitzat
+    description: Xarxa social per trobar amics per tot catalunya
+
+paths:
+  /login:
+    post:
+      summary: Inicia sessió d'usuari
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nom:
+                  type: string
+                  description: Nom de l'usuari
+                contrasenya:
+                  type: string
+                  description: Contrasenya de l'usuari
+      responses:
+        '200':
+          description: Sessió iniciada correctament
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Missatge de confirmació
+                    example: 'ok'
+                  usuari:
+                    $ref: '#/components/schemas/usuari'
+        '401':
+          description: Credencials incorrectes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Missatge d'error per credencials incorrectes
+    
+  /amistatscomarca/{userId}/{comarcaId}:
+    get:
+      summary: Obté les amistats per usuari i comarca
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+            description: ID de l'usuari
+          description: ID de l'usuari per obtenir les amistats
+        - in: path
+          name: comarcaId
+          required: true
+          schema:
+            type: integer
+            description: ID de la comarca
+          description: ID de la comarca per obtenir les amistats
+      responses:
+        '200':
+          description: Amistats obtingudes correctament
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/amistat'
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+  
+  /usuariscomarca/{comarcaId}:
+    get:
+      summary: Obté usuaris per comarca
+      parameters:
+        - in: path
+          name: comarcaId
+          required: true
+          schema:
+            type: integer
+          description: Identificador de la comarca
+      responses:
+        '200':
+          description: Llista d'usuaris per la comarca
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/usuari'
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+                    
+  /comarquesamistats/{userId}:
+    get:
+      summary: Obtenir comarques amb amistats per usuari
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+          description: Identificador de l'usuari
+      responses:
+        '200':
+          description: Llista de comarques amb amistats de usuari
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/comarca'
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+                  
+  /solicitudamistat:
+    post:
+      summary: Enviar sol·licitud d'amistat
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/solicitud'
+      responses:
+        '200':
+          description: Sol·licitud d'amistat creada amb èxit
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Sol·licitud d'amistat creada amb èxit
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+
+  /solicituds/{userId1}/{userId2}:
+    get:
+      summary: Obtenir sol·licitud d'amistat per IDs d'usuari
+      parameters:
+        - in: path
+          name: userId1
+          required: true
+          schema:
+            type: integer
+          description: Identificador de l'usuari 1
+        - in: path
+          name: userId2
+          required: true
+          schema:
+            type: integer
+          description: Identificador de l'usuari 2
+      responses:
+        '200':
+          description: Informació de la sol·licitud d'amistat
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  existeixSolicitud:
+                    type: boolean
+                  solicitud:
+                    $ref: '#/components/schemas/solicitud'
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+
+  /solicitudsPend/{userId}:
+    get:
+      summary: Obtenir sol·licituds pendents per acceptar per ID d'usuari
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+          description: Identificador de l'usuari
+      responses:
+        '200':
+          description: Llista de sol·licituds pendents per acceptar
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/solicitud'
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+
+  /solicituds/{userId}:
+    get:
+      summary: Obtenir sol·licituds pendents per ID d'usuari
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+          description: Identificador de l'usuari
+      responses:
+        '200':
+          description: Llista de sol·licituds pendents
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/solicitud'
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+
+  /solicitud/{usuariId1}/{usuariId2}:
+    delete:
+      summary: Eliminar sol·licitud d'amistat per IDs d'usuari
+      parameters:
+        - in: path
+          name: usuariId1
+          required: true
+          schema:
+            type: integer
+          description: Identificador de l'usuari 1
+        - in: path
+          name: usuariId2
+          required: true
+          schema:
+            type: integer
+          description: Identificador de l'usuari 2
+      responses:
+        '200':
+          description: Sol·licitud d'amistat eliminada amb èxit
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Sol·licitud d'amistat eliminada amb èxit
+        '404':
+          description: Sol·licitud d'amistat no trobada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Sol·licitud d'amistat no trobada
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud 
+  /usuaris:
+    get:
+      summary: Obtenir tots els usuaris
+      responses:
+        '200':
+          description: Llista d'usuaris
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/usuari'
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+    post:
+      summary: Crear un nou usuari
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/usuari'
+      responses:
+        '200':
+          description: Usuari creat amb èxit
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Usuari creat amb èxit
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+
+  /usuaris/{userId}:
+    get:
+      summary: Obtenir un usuari per ID
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+          description: Identificador de l'usuari
+      responses:
+        '200':
+          description: Informació de l'usuari
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usuari'
+        '404':
+          description: Usuari no trobat
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Usuari no trobat
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+    put:
+      summary: Actualitzar un usuari per ID
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+          description: Identificador de l'usuari
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/usuari'
+      responses:
+        '200':
+          description: Usuari actualitzat amb èxit
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Usuari actualitzat amb èxit
+        '404':
+          description: Usuari no trobat
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Usuari no trobat
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+    delete:
+      summary: Eliminar un usuari per ID
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+          description: Identificador de l'usuari
+      responses:
+        '200':
+          description: Usuari eliminat amb èxit
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Usuari eliminat amb èxit
+        '404':
+          description: Usuari no trobat
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Usuari no trobat
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+    
+  /amistats:
+    get:
+      summary: Obtenir totes les amistats
+      responses:
+        '200':
+          description: Llista d'amistats
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/amistat'
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+    post:
+      summary: Crear una nova amistat
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/amistat'
+      responses:
+        '200':
+          description: Amistat creada amb èxit
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Amistat creada amb èxit
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+
+  /amistats/{amistatId}:
+    delete:
+      summary: Eliminar una amistat per ID
+      parameters:
+        - in: path
+          name: amistatId
+          required: true
+          schema:
+            type: integer
+          description: Identificador de l'amistat
+      responses:
+        '200':
+          description: Amistat eliminada amb èxit
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Amistat eliminada amb èxit
+        '404':
+          description: Amistat no trobada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Amistat no trobada
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+
+  /amistats/{userId}:
+    put:
+      summary: Actualitzar una amistat per ID d'usuari
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+          description: Identificador d'usuari
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/amistat'
+      responses:
+        '200':
+          description: Amistat actualitzada amb èxit
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Amistat actualitzada amb èxit
+        '404':
+          description: Amistat no trobada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Amistat no trobada
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+    get:
+      summary: Obtenir totes les amistats d'un usuari per ID
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+          description: Identificador d'usuari
+      responses:
+        '200':
+          description: Llista d'amistats de l'usuari
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/amistat'
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+
+  /id/amistats:
+    get:
+      summary: Generar un nou ID per a l'amistat
+      responses:
+        '200':
+          description: Nou ID generat amb èxit
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Nou ID generat amb èxit
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+  /comarques:
+    get:
+      summary: Obtenir totes les comarques
+      responses:
+        '200':
+          description: Llista de comarques
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/comarca'
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+    post:
+      summary: Crear una nova comarca
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/comarca'
+      responses:
+        '200':
+          description: Comarca creada amb èxit
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Comarca creada amb èxit
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+  
+
+  /comarques/nom/{comarcaNom}:
+    get:
+      summary: Obtenir una comarca per nom
+      parameters:
+        - in: path
+          name: comarcaNom
+          required: true
+          schema:
+            type: string
+          description: Nom de la comarca
+      responses:
+        '200':
+          description: Informació de la comarca
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/comarca'
+        '404':
+          description: Comarca no trobada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Comarca no trobada
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+
+
+
+  /comarques/{comarcaId}:
+    get:
+      summary: Obtenir una comarca per ID
+      parameters:
+        - in: path
+          name: comarcaId
+          required: true
+          schema:
+            type: integer
+          description: Identificador de la comarca
+      responses:
+        '200':
+          description: Informació de la comarca
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/comarca'
+        '404':
+          description: Comarca no trobada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Comarca no trobada
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+    put:
+      summary: Actualitzar una comarca per ID
+      parameters:
+        - in: path
+          name: comarcaId
+          required: true
+          schema:
+            type: integer
+          description: Identificador de la comarca
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/comarca'
+      responses:
+        '200':
+          description: Comarca actualitzada amb èxit
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Comarca actualitzada amb èxit
+        '404':
+          description: Comarca no trobada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Comarca no trobada
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+    delete:
+      summary: Eliminar una comarca per ID
+      parameters:
+        - in: path
+          name: comarcaId
+          required: true
+          schema:
+            type: integer
+          description: Identificador de la comarca
+      responses:
+        '200':
+          description: Comarca eliminada amb èxit
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Comarca eliminada amb èxit
+        '404':
+          description: Comarca no trobada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Comarca no trobada
+        '500':
+          description: Error en el processament del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hi ha hagut un error en processar la sol·licitud.
+                    description: Error en el processament de la sol·licitud
+  
+components:
+  schemas:
+    usuari:
+      type: object
+      properties:
+        userId:
+          type: integer
+          example: 1
+        nom:
+          type: string
+          example: Usuari1
+        comarcaId:
+          type: integer
+          example: 9
+        contrasenya:
+          type: string
+          example: Usuari1
+        admin:
+          type: integer
+          example: 1
+      required:
+        - nom
+        - contrasenya
+      xml:
+        name: usuari
+
+    amistat:
+      type: object
+      properties:
+        userId1:
+          type: integer
+          example: 2
+        userId2:
+          type: integer
+          example: 1
+        nivell:
+          type: integer
+          example: 2
+        amistatId:
+          type: integer
+          example: 6
+      required:
+        - userId1
+        - userId2
+        - nivell
+        - amistatId
+      xml:
+        name: amistat
+
+    comarca:
+      type: object
+      properties:
+        comarcaId:
+          type: integer
+        nom:
+          type: string
+      required:
+        - comarcaId
+        - nom
+      xml:
+        name: comarca
+
+    solicitud:
+      type: object
+      properties:
+        usuariId1:
+          type: integer
+        usuariId2:
+          type: integer
+        solicitudId:
+          type: integer
+      required:
+        - usuariId1
+        - usuariId2
+        - solicitudId
+      xml:
+        name: solicitud
+
+
+    
+
+    

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Gestor d'Amistats</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Menú lateral a l'esquerra -->
+      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="gestorUsers.html">
+                Gestor d'Usuaris
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">
+                Gestor d'Amistats
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html">
+                Login
+              </a>
+            </li>
+            <!-- Pots afegir altres elements del menú aquí -->
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Contingut principal -->
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="container mt-5">
+          <h2>Gestor d'Amistats</h2>
+
+          <!-- Formulari per afegir una amistat -->
+          <form id="formAfegirAmistat">
+            <div class="form-group">
+              <label for="user1">Usuari 1:</label>
+              <select class="form-control" id="user1" required>
+                <!-- Usuari seleccionat anirà aquí -->
+              </select>
+          
+              <label for="user2">Usuari 2:</label>
+              <select class="form-control" id="user2" required>
+                <!-- Usuari seleccionat anirà aquí -->
+              </select>
+              
+              <label for="nivell">Nivell d'amistat:</label>
+              <input type="number" class="form-control" id="nivell" placeholder="Introdueix el nivell" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Afegir Amistat</button>
+          </form>
+          <hr>
+
+          <h2>Llista d'Amistats</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Usuari 1</th>
+                <th scope="col">Usuari 2</th>
+                <th scope="col">Nivell d'amistat</th>
+              </tr>
+            </thead>
+            <tbody id="llistaAmistats">
+              <!-- Contingut generat dinàmicament amb JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Afegir jQuery i altres scripts JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- Afegeix altres enllaços JavaScript si és necessari -->
+  <script src="js/amistats_controller.js"></script>
+</body>
+
+</html>

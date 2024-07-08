@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Mapa d'Amistats</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    #map {
+      height: 700px;
+    }
+
+    #sidebar {
+      width: 20%;
+      height: 100vh;
+      background-color: #f1f1f1;
+      padding: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container mt-5">
+    <div class="row">
+      <div id="sidebar" class="col-md-3">
+        <h2>Usuari Loggejat</h2>
+        <p id="nomUsuari"></p>
+        
+        <!-- Afegit per mostrar les sol·licituds pendents -->
+        <h2>Sol·licituds Pendents</h2>
+        <ul id="llistaSolicitudsPendents" class="list-group">
+          <!-- Elements de la llista de sol·licituds pendents es mostraran aquí -->
+        </ul>
+      </div>
+
+      <div class="col-md-9">
+        <h2 class="mb-4">Mapa d'Amistats</h2>
+        <div id="map"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="js/mapa_controller.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

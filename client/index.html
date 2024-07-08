@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Comarquitzat - Login</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Nom d'usuari:</label>
+        <input type="text" class="form-control" id="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Contrasenya:</label>
+        <input type="password" class="form-control" id="password" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Iniciar sessió</button>
+    </form>
+  </div>
+
+  <div class="container mt-5">
+    <h2>Registre</h2>
+    <form id="registerForm">
+      <div class="form-group">
+        <label for="username">Nom d'usuari:</label>
+        <input type="text" class="form-control" id="usernames" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Contrasenya:</label>
+        <input type="password" class="form-control" id="passwords" required>
+      </div>
+      <div class="form-group">
+        <label for="comarcaId">Comarca:</label>
+        <select class="form-control" id="comarcas" required>
+            <!-- Aquí es generaran les opcions amb les comarques -->
+          </select></div>
+      
+      <button type="submit" class="btn btn-primary">Registrar-se</button>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

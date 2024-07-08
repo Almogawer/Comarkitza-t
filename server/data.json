@@ -1,0 +1,302 @@
+{
+    "usuaris": [
+        {
+            "userId": 1,
+            "nom": "Usuari1",
+            "comarcaId": 9,
+            "contrasenya": "Usuari1",
+            "admin": 1
+        },
+        {
+            "nom": "Mariona",
+            "contrasenya": "Mariona",
+            "comarcaId": 21,
+            "userId": 7,
+            "admin": 0
+        },
+        {
+            "nom": "Oriol",
+            "comarcaId": 17,
+            "contrasenya": "Oriol",
+            "admin": 0,
+            "userId": 9
+        },
+        {
+            "nom": "Bruna",
+            "comarcaId": 24,
+            "contrasenya": "Bruna",
+            "admin": 0,
+            "userId": 10
+        },
+        {
+            "nom": "Marc",
+            "comarcaId": 12,
+            "contrasenya": "Marc",
+            "admin": 0,
+            "userId": 11
+        },
+        {
+            "nom": "Pau",
+            "comarcaId": 28,
+            "contrasenya": "Pau",
+            "admin": 0,
+            "userId": 12
+        },
+        {
+            "nom": "Arnau",
+            "comarcaId": 30,
+            "contrasenya": "Arnau",
+            "admin": 0,
+            "userId": 13
+        },
+        {
+            "nom": "admin",
+            "comarcaId": 9,
+            "contrasenya": "admin",
+            "admin": 1,
+            "userId": 15
+        }
+    ],
+    "amistats": [
+        {
+            "userId1": 1,
+            "userId2": 2,
+            "nivell": 1,
+            "amistatId": 1
+        },
+        {
+            "userId1": 6,
+            "userId2": 2,
+            "nivell": 3,
+            "amistatId": 2
+        },
+        {
+            "userId1": "1",
+            "userId2": "4",
+            "nivell": "1",
+            "amistatId": 2
+        },
+        {
+            "userId2": 8,
+            "userId1": 2,
+            "nivell": 1,
+            "amistatId": 4
+        },
+        {
+            "userId1": 7,
+            "userId2": 3,
+            "nivell": 2,
+            "amistatId": 5
+        },
+        {
+            "userId2": 13,
+            "userId1": 10,
+            "nivell": 1,
+            "amistatId": 6
+        },
+        {
+            "userId2": 13,
+            "userId1": 12,
+            "nivell": 1,
+            "amistatId": 7
+        }
+    ],
+    "comarques": [
+        {
+            "comarcaId": 1,
+            "nom": "Alt Camp"
+        },
+        {
+            "comarcaId": 2,
+            "nom": "Alt Empordà"
+        },
+        {
+            "comarcaId": 3,
+            "nom": "Alt Penedès"
+        },
+        {
+            "comarcaId": 4,
+            "nom": "Alt Urgell"
+        },
+        {
+            "comarcaId": 5,
+            "nom": "Alta Ribagorça"
+        },
+        {
+            "comarcaId": 6,
+            "nom": "Anoia"
+        },
+        {
+            "comarcaId": 7,
+            "nom": "Bages"
+        },
+        {
+            "comarcaId": 8,
+            "nom": "Baix Camp"
+        },
+        {
+            "comarcaId": 9,
+            "nom": "Baix Ebre"
+        },
+        {
+            "comarcaId": 10,
+            "nom": "Baix Empordà"
+        },
+        {
+            "comarcaId": 11,
+            "nom": "Baix Llobregat"
+        },
+        {
+            "comarcaId": 12,
+            "nom": "Baix Penedès"
+        },
+        {
+            "comarcaId": 13,
+            "nom": "Barcelonès"
+        },
+        {
+            "comarcaId": 14,
+            "nom": "Berguedà"
+        },
+        {
+            "comarcaId": 15,
+            "nom": "Cerdanya"
+        },
+        {
+            "comarcaId": 16,
+            "nom": "Conca de Barberà"
+        },
+        {
+            "comarcaId": 17,
+            "nom": "Garraf"
+        },
+        {
+            "comarcaId": 18,
+            "nom": "Garrigues"
+        },
+        {
+            "comarcaId": 19,
+            "nom": "Garrotxa"
+        },
+        {
+            "comarcaId": 20,
+            "nom": "Gironès"
+        },
+        {
+            "comarcaId": 21,
+            "nom": "Maresme"
+        },
+        {
+            "comarcaId": 22,
+            "nom": "Montsià"
+        },
+        {
+            "comarcaId": 23,
+            "nom": "Noguera"
+        },
+        {
+            "comarcaId": 24,
+            "nom": "Osona"
+        },
+        {
+            "comarcaId": 25,
+            "nom": "Pallars Jussà"
+        },
+        {
+            "comarcaId": 26,
+            "nom": "Pallars Sobirà"
+        },
+        {
+            "comarcaId": 27,
+            "nom": "Pla de l'Estany"
+        },
+        {
+            "comarcaId": 28,
+            "nom": "Pla d'Urgell"
+        },
+        {
+            "comarcaId": 29,
+            "nom": "Priorat"
+        },
+        {
+            "comarcaId": 30,
+            "nom": "Ribera d'Ebre"
+        },
+        {
+            "comarcaId": 31,
+            "nom": "Ripollès"
+        },
+        {
+            "comarcaId": 32,
+            "nom": "Segarra"
+        },
+        {
+            "comarcaId": 33,
+            "nom": "Segrià"
+        },
+        {
+            "comarcaId": 34,
+            "nom": "Selva"
+        },
+        {
+            "comarcaId": 35,
+            "nom": "Solsonès"
+        },
+        {
+            "comarcaId": 36,
+            "nom": "Tarragonès"
+        },
+        {
+            "comarcaId": 37,
+            "nom": "Terra Alta"
+        },
+        {
+            "comarcaId": 38,
+            "nom": "Urgell"
+        },
+        {
+            "comarcaId": 39,
+            "nom": "Vall d'Aran"
+        },
+        {
+            "comarcaId": 40,
+            "nom": "Vallès Occidental"
+        },
+        {
+            "comarcaId": 41,
+            "nom": "Vallès Oriental"
+        }
+    ],
+    "solicituds": [
+        {
+            "usuariId1": 5,
+            "usuariId2": 3,
+            "solicitudId": 1
+        },
+        {
+            "usuariId1": 2,
+            "usuariId2": 7,
+            "solicitudId": 2
+        },
+        {
+            "usuariId1": 2,
+            "usuariId2": 3,
+            "solicitudId": 3
+        },
+        {
+            "usuariId1": 13,
+            "usuariId2": 9,
+            "solicitudId": 4
+        },
+        {
+            "usuariId1": 13,
+            "usuariId2": 7,
+            "solicitudId": 5
+        },
+        {
+            "usuariId1": 10,
+            "usuariId2": 7,
+            "solicitudId": 7
+        }
+    ]
+}
